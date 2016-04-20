@@ -38,7 +38,7 @@ object Play2WarServer {
 
   val context = ApplicationLoader.createContext(
     new Environment(new File("."), ApplicationLoader.getClass.getClassLoader, Mode.Prod))
-  Logger.configure(context.environment)
+  LoggerConfigurator(context.environment.classLoader).foreach { _.configure(context.environment) }
 
   lazy val configuration = Play.current.configuration
 
